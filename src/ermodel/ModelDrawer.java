@@ -126,7 +126,7 @@ public class ModelDrawer {
 				ImageLoader loader = new ImageLoader();
 				loader.data = new ImageData[] { img.getImageData() };
 				SimpleDateFormat fileFormat = new SimpleDateFormat("yyyy.MM.dd-HH:mm:ss");
-				loader.save(fileFormat.format(new Date()), SWT.IMAGE_BMP);
+				loader.save(fileFormat.format(new Date()) + ".bmp", SWT.IMAGE_BMP);
 				gc.dispose();
 				img.dispose();
 			}
