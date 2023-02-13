@@ -134,7 +134,9 @@ public class ModelDrawer {
 		
 		canvas.addPaintListener(event -> {
 			GC gc = event.gc;
-			draw(gc, new DrawObject(mouseObject, mousePos));
+			gc.setForeground(COLOUR_DEFAULT);
+			
+			draw(gc, new DrawObject(mouseObject, mousePos));			
 			
 			for(Connection con : connections) {
 				gc.drawLine(con.from.position.x, con.from.position.y, con.to.position.x, con.to.position.y);
