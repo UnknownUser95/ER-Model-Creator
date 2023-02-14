@@ -221,17 +221,17 @@ public class ModelDrawer {
 				}
 				
 				// backspace
-				if(e.keyCode == 8) {
+				if(e.keyCode == 8 && selected.isPresent()) {
 					selected.get().removeLastChar();
 				}
 				
 				// any valid char
-				if(Character.isLetter(e.character)) {
+				if(Character.isLetter(e.character) && selected.isPresent()) {
 					selected.get().addCharacter(e.character);
 				}
 				
 				// TAB
-				if(e.keyCode == 9 && selected.get().type == MouseObject.ATTRIBUTE) {
+				if(e.keyCode == 9 && selected.isPresent() && selected.get().type == MouseObject.ATTRIBUTE) {
 					selected.get().toggleTag(PRIMARY_KEY);
 				}
 				redraw();
