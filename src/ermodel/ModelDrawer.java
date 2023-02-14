@@ -134,7 +134,7 @@ public class ModelDrawer {
 		
 		canvas.addPaintListener(event -> {
 			GC gc = event.gc;
-			gc.setForeground(COLOUR_DEFAULT);
+//			gc.setForeground(COLOUR_DEFAULT);
 			
 			draw(gc, new DrawObject(mouseObject, mousePos));			
 			
@@ -148,8 +148,6 @@ public class ModelDrawer {
 //				for(Connector con : drawObject.connectors) {
 //					gc.drawOval(con.position.x - 5, con.position.y - 5, 10, 10);
 //				}
-				
-				gc.setForeground((selected.isPresent() && drawObject.equals(selected.get())) ? COLOUR_SELECTED : COLOUR_DEFAULT);
 				
 				draw(gc, drawObject);
 			}
@@ -222,12 +220,19 @@ public class ModelDrawer {
 					selected = Optional.empty();
 				}
 				
+				// backspace
 				if(e.keyCode == 8) {
 					selected.get().removeLastChar();
 				}
 				
+				// any valid char
 				if(Character.isLetter(e.character)) {
 					selected.get().addCharacter(e.character);
+				}
+				
+				// TAB
+				if(e.keyCode == 9 && selected.get().type == MouseObject.ATTRIBUTE) {
+					selected.get().toggleTag(PRIMARY_KEY);
 				}
 				redraw();
 			}
@@ -249,6 +254,9 @@ public class ModelDrawer {
 	}
 	
 	private void draw(GC gc, DrawObject obj) {
+		gc.setLineWidth((obj.hasTag(PRIMARY_KEY)) ? PRIMARY_KEY_LINE_WIDTH : DEFAULT_LINE_WIDTH);
+		gc.setForeground((selected.isPresent() && obj.equals(selected.get())) ? COLOUR_SELECTED : COLOUR_DEFAULT);
+		
 		if(obj.type == MouseObject.ATTRIBUTE) {
 			int[] dimensions = obj.getPolygon();
 			gc.drawOval(obj.position.x + obj.type.xOffset, obj.position.y + obj.type.yOffset, dimensions[0], dimensions[1]);

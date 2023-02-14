@@ -16,4 +16,9 @@ public abstract class Common {
 	public static double distanceOfPoints(Point p1, Point p2) {
 		return Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
 	}
+	
+	public static final byte PRIMARY_KEY = 0b00000001;
+	
+	public static final int DEFAULT_LINE_WIDTH = 1;
+	public static final int PRIMARY_KEY_LINE_WIDTH = 3;
 }

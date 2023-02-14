@@ -12,6 +12,7 @@ public class DrawObject {
 	public final MouseObject type;
 	public final Connector[] connectors = new Connector[4];
 	private String text = "";
+	private byte tags = 0;
 	
 	public DrawObject(MouseObject shape, Point position) {
 		super();
@@ -91,6 +92,20 @@ public class DrawObject {
 		if(text.length() > 0) {
 			setText(getText().substring(0, text.length() - 1));
 		}
+	}
+	
+	public boolean hasTag(final byte tag) {
+		return (tags & tag) != 0;
+	}
+	
+	public void setTag(final byte tag) {
+		if(!hasTag(tag)) {
+			tags |= tag;
+		}
+	}
+	
+	public void toggleTag(final byte tag) {
+		tags ^= tag;
 	}
 
 	@Override
