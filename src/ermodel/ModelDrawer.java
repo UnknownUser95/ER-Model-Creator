@@ -2,6 +2,7 @@ package ermodel;
 
 import static ermodel.Common.*;
 
+import java.io.*;
 import java.text.*;
 import java.util.*;
 
@@ -125,8 +126,9 @@ public class ModelDrawer {
 				gc.copyArea(img, 0, 0);
 				ImageLoader loader = new ImageLoader();
 				loader.data = new ImageData[] { img.getImageData() };
-				SimpleDateFormat fileFormat = new SimpleDateFormat("yyyy.MM.dd-HH:mm:ss");
-				loader.save(fileFormat.format(new Date()) + ".bmp", SWT.IMAGE_BMP);
+				SimpleDateFormat fileFormat = new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss");
+				File file = new File("./" + fileFormat.format(new Date()) + ".bmp");
+				loader.save(file.getAbsolutePath(), SWT.IMAGE_BMP);
 				gc.dispose();
 				img.dispose();
 			}
